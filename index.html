@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +49,7 @@ html{width:100%;min-height:100%;overflow-x:hidden}body{width:100%;min-width:0;ov
           <div class="buttons"><button class="btn no" id="noBtn">YES</button><button class="btn yes" id="yesBtn">NO</button></div>
         </div>
         <div class="main" id="letterArea" style="display:none">
-          <div class="letter show">
+          <div class="letter show" id="message1">
             <h2>💌 OPENED WITH LOVE</h2>
             <p>My home ,</p>
             <p>If you opened this, it means you miss me. You miss me? Yeyyy , she misses ♡</p>
@@ -62,8 +63,26 @@ And whenever you feel sad, tired, or unsure of yourself, I hope you remember tha
 I love you, and I’m really happy that I get to have you in my life.</p>
             <p> Idk  what the future holds, but I wish i am part of it with you. </p>
             <p class="sig">—Secret baka malaman mo na crush kita (๑>؂•̀๑) </p>
+            <div class="back">
+              <button class="btn" onclick="showMessage2()">💌 NEXT MESSAGE</button>
+            </div>
           </div>
-          <div class="back"><button class="btn" onclick="resetLetter()">READ AGAIN</button></div>
+
+          <div class="letter" id="message2">
+            <h2>💗 ONE MORE THING</h2>
+            <p>My favorite person,</p>
+            <p>This is my second little message for you. I just want you to know that even the smallest moments with you can mean so much to me.</p>
+            <p>I hope this little page makes you smile whenever you open it. Thank you for being someone special in my life. ♡</p>
+            <p>Whatever happens, I hope we keep making memories that we can look back on and smile about.</p>
+            <p class="sig">—Secret baka baka lalo mo na akong mahalin (๑>؂•̀๑)</p>
+            <div class="back">
+              <button class="btn" onclick="showMessage1()">💌 BACK TO FIRST MESSAGE</button>
+            </div>
+          </div>
+
+          <div class="back">
+            <button class="btn" onclick="resetLetter()">READ AGAIN</button>
+          </div>
         </div>
       </section>
       <div class="credits">made with HTML · CSS · JavaScript · a little bit of love ♡</div>
@@ -100,7 +119,19 @@ document.getElementById('yesBtn').onclick=()=>{
   document.getElementById('letterArea').style.display='block';
   burst();
 };
-function resetLetter(){document.getElementById('letterArea').style.display='none';document.getElementById('question').style.display='block'}
+function resetLetter(){
+  document.getElementById('letterArea').style.display='none';
+  document.getElementById('question').style.display='block';
+  showMessage1();
+}
+function showMessage1(){
+  document.getElementById('message1').classList.add('show');
+  document.getElementById('message2').classList.remove('show');
+}
+function showMessage2(){
+  document.getElementById('message1').classList.remove('show');
+  document.getElementById('message2').classList.add('show');
+}
 function burst(){for(let i=0;i<28;i++){const h=document.createElement('div');h.textContent=['♥','♡','✦','❤'][Math.floor(Math.random()*4)];h.style.cssText=`position:fixed;left:${50+(Math.random()*34-17)}%;top:${55+(Math.random()*10-5)}%;font-size:${14+Math.random()*24}px;color:#e83b68;z-index:40;pointer-events:none;animation:burst .9s ease-out forwards;--x:${(Math.random()*300-150)}px;--y:${-(80+Math.random()*240)}px`;document.body.appendChild(h);setTimeout(()=>h.remove(),1000)}}
 const s=document.createElement('style');s.textContent='@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(360deg);opacity:0}}';document.head.appendChild(s);
 function makeHearts(){const box=document.getElementById('hearts');for(let i=0;i<32;i++){const h=document.createElement('span');h.className='heart';h.textContent=Math.random()>.25?'♥':'♡';h.style.left=Math.random()*100+'%';h.style.animationDuration=(5+Math.random()*8)+'s';h.style.animationDelay=(-Math.random()*10)+'s';h.style.fontSize=(10+Math.random()*18)+'px';box.appendChild(h)}}makeHearts();
